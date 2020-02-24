@@ -1,12 +1,7 @@
 package main
 
-import (
-	"awesomeProject1/controllers"
-	"log"
-	"net/http"
-)
+import "awesomeProject1/router"
 
 func main() {
-	http.HandleFunc("/getAllBooks",controllers.GetAllBooks)
-	log.Fatal(http.ListenAndServe(":10000", nil))
+	router.HandleRequest()
 }
