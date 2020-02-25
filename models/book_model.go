@@ -9,7 +9,7 @@ type BookModel struct{
 	Db *sql.DB
 }
 func (bookModel BookModel)FindAll() ([]entities.Book,error){
-	rows,err:=bookModel.Db.Query("select  * from books where bookname REGEXP 'Girl'")
+	rows,err:=bookModel.Db.Query("select  * from books")
 	if err!=nil{
 		return nil,err
 	}else {
