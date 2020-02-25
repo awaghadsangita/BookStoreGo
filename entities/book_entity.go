@@ -1,6 +1,5 @@
 package entities
 
-
 type Book struct{
 	Id int64 `json:"Id""`
 	BookName string `json:"BookName""`
