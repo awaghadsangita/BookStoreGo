@@ -1,11 +1,11 @@
 package router
 import(
 	"awesomeProject1/controllers"
-	"log"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 func HandleRequest(){
-	http.HandleFunc("/getBooksByTitle",controllers.GetBooksByTitle)
-	http.HandleFunc("/getAllBooks",controllers.GetAllBooks)
-	log.Fatal(http.ListenAndServe(":10000", nil))
+	r:=gin.Default()
+	r.GET("/getBookByTitle",controllers.GetBooksByTitle)
+	r.GET("/getAllBooks",controllers.GetAllBooks)
+	r.Run()
 }

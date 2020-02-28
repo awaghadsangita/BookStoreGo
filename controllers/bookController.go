@@ -3,12 +3,11 @@ package controllers
 import (
 	"awesomeProject1/config"
 	"awesomeProject1/models"
-	"encoding/json"
 	"fmt"
-	"net/http"
+	"github.com/gin-gonic/gin"
 )
 
-func GetAllBooks(w http.ResponseWriter,r *http.Request){
+func GetAllBooks(context *gin.Context){
 	db,err:=config.GetMySQLDB()
 	if err!=nil{
 		fmt.Println(err)
@@ -19,22 +18,24 @@ func GetAllBooks(w http.ResponseWriter,r *http.Request){
 		if err!=nil{
 			fmt.Println(err)
 		}else{
-			json.NewEncoder(w).Encode(books)
+			context.JSON(200,books)
+
 		}
 	}
 }
 
-func GetBooksByTitle(w http.ResponseWriter,r *http.Request){
+func GetBooksByTitle(context *gin.Context){
 	db,err:=config.GetMySQLDB()
 	if err!=nil{
 		fmt.Println(err)
 	}else{
 		bookModel:=models.BookModel{Db:db}
-		books,err:=bookModel.SearchBooksByTitle(r.URL.Query().Get("title"))
+		books,err:=bookModel.SearchBooksByTitle(context.Query("title"))
 		if err!=nil{
 			fmt.Println(err)
 		}else{
-			json.NewEncoder(w).Encode(books)
+			context.JSON(200,books)
+			//json.NewEncoder(w).Encode(bookks)
 		}
 	}
 }
